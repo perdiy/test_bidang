@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:perdiy/data/datasource/local_datasource.dart';
 import 'package:perdiy/data/models/login/request/login_request_model.dart';
+import 'package:perdiy/presentation/page/auth/register_page.dart';
 import 'package:perdiy/presentation/page/home_page.dart';
 import 'package:perdiy/presentation/widgets/custome_textfield.dart';
 import '../../../bloc/login/login_bloc.dart';
@@ -71,12 +72,12 @@ class _LoginPageState extends State<LoginPage> {
                   },
                   loaded: (model) async {
                     await _localDataSource.saveToken(model.token);
-                    // Navigasi ke HomePage
-                    Navigator.pushReplacement(
+                    Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(
                         builder: (context) => const HomePage(),
                       ),
+                      (route) => false,
                     );
                   },
                   orElse: () {},
@@ -88,24 +89,39 @@ class _LoginPageState extends State<LoginPage> {
                     child: CircularProgressIndicator(),
                   ),
                   orElse: () {
-                    return SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          final email = _emailController.text.trim();
-                          final password = _passwordController.text.trim();
+                    return Column(
+                      children: [
+                        SizedBox(
+                          width: double.infinity,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              final email = _emailController.text.trim();
+                              final password = _passwordController.text.trim();
 
-                          context.read<LoginBloc>().add(
-                                LoginEvent.login(
-                                  LoginRequestModel(
-                                    email: email,
-                                    password: password,
-                                  ),
-                                ),
-                              );
-                        },
-                        child: const Text('Login'),
-                      ),
+                              context.read<LoginBloc>().add(
+                                    LoginEvent.login(
+                                      LoginRequestModel(
+                                        email: email,
+                                        password: password,
+                                      ),
+                                    ),
+                                  );
+                            },
+                            child: const Text('Login'),
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const RegisterPage(),
+                              ),
+                            );
+                          },
+                          child: const Text('Belum punya akun? Daftar di sini'),
+                        ),
+                      ],
                     );
                   },
                 );
