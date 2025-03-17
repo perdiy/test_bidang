@@ -21,6 +21,8 @@ RegisterResponseModel _$RegisterResponseModelFromJson(
 
 /// @nodoc
 mixin _$RegisterResponseModel {
+  @JsonKey(name: "id")
+  int get id => throw _privateConstructorUsedError;
   @JsonKey(name: "token")
   String get token => throw _privateConstructorUsedError;
 
@@ -40,7 +42,8 @@ abstract class $RegisterResponseModelCopyWith<$Res> {
           $Res Function(RegisterResponseModel) then) =
       _$RegisterResponseModelCopyWithImpl<$Res, RegisterResponseModel>;
   @useResult
-  $Res call({@JsonKey(name: "token") String token});
+  $Res call(
+      {@JsonKey(name: "id") int id, @JsonKey(name: "token") String token});
 }
 
 /// @nodoc
@@ -59,9 +62,14 @@ class _$RegisterResponseModelCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? token = null,
   }) {
     return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
       token: null == token
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
@@ -79,7 +87,8 @@ abstract class _$$RegisterResponseModelImplCopyWith<$Res>
       __$$RegisterResponseModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({@JsonKey(name: "token") String token});
+  $Res call(
+      {@JsonKey(name: "id") int id, @JsonKey(name: "token") String token});
 }
 
 /// @nodoc
@@ -96,9 +105,14 @@ class __$$RegisterResponseModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? token = null,
   }) {
     return _then(_$RegisterResponseModelImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
       token: null == token
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
@@ -111,18 +125,22 @@ class __$$RegisterResponseModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$RegisterResponseModelImpl implements _RegisterResponseModel {
   const _$RegisterResponseModelImpl(
-      {@JsonKey(name: "token") required this.token});
+      {@JsonKey(name: "id") required this.id,
+      @JsonKey(name: "token") required this.token});
 
   factory _$RegisterResponseModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$RegisterResponseModelImplFromJson(json);
 
+  @override
+  @JsonKey(name: "id")
+  final int id;
   @override
   @JsonKey(name: "token")
   final String token;
 
   @override
   String toString() {
-    return 'RegisterResponseModel(token: $token)';
+    return 'RegisterResponseModel(id: $id, token: $token)';
   }
 
   @override
@@ -130,12 +148,13 @@ class _$RegisterResponseModelImpl implements _RegisterResponseModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$RegisterResponseModelImpl &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.token, token) || other.token == token));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, token);
+  int get hashCode => Object.hash(runtimeType, id, token);
 
   /// Create a copy of RegisterResponseModel
   /// with the given fields replaced by the non-null parameter values.
@@ -156,12 +175,16 @@ class _$RegisterResponseModelImpl implements _RegisterResponseModel {
 
 abstract class _RegisterResponseModel implements RegisterResponseModel {
   const factory _RegisterResponseModel(
-          {@JsonKey(name: "token") required final String token}) =
+          {@JsonKey(name: "id") required final int id,
+          @JsonKey(name: "token") required final String token}) =
       _$RegisterResponseModelImpl;
 
   factory _RegisterResponseModel.fromJson(Map<String, dynamic> json) =
       _$RegisterResponseModelImpl.fromJson;
 
+  @override
+  @JsonKey(name: "id")
+  int get id;
   @override
   @JsonKey(name: "token")
   String get token;
